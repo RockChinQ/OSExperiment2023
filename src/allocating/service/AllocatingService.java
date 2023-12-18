@@ -16,6 +16,7 @@ public class AllocatingService {
     ArrayList<AbstractAllocatingAlgorithm> algorithms;
 
     public AllocatingService(int memorySize) {
+        // 初始化 分配服务
         this.memorySize = memorySize;
         this.processes = new ArrayList<>();
 
@@ -30,10 +31,12 @@ public class AllocatingService {
     }
 
     public AllocatingResult[] addProcess(RunningProcess process) {
+        // 添加进程
         processes.add(process);
 
         AllocatingResult[] results = new AllocatingResult[algorithms.size()];
 
+        // 计算每个算法情况下的新的进程占用情况
         for (int i = 0; i < algorithms.size(); i++) {
             algorithms.get(i).addProcess(memorySize, process);
             results[i] = new AllocatingResult(algorithms.get(i).getAlgoName(), algorithms.get(i).getProcessOccupancies());
@@ -43,6 +46,7 @@ public class AllocatingService {
     }
 
     public AllocatingResult[] removeProcess(RunningProcess process) {
+        // 移除进程
         processes.remove(process);
 
         for (int i = 0; i < algorithms.size(); i++) {

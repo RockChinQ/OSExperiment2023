@@ -40,6 +40,7 @@ public class MemoryGraphPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                // 点击一个进程时，触发事件
                 int sheetIndex = e.getX() / SHEET_WIDTH;
                 for (ProcessOccupancy process : processes) {
                     if (process.getAllocatedBegin() <= sheetIndex && process.getAllocatedBegin() + process.getProcess().getNeedSize() > sheetIndex) {
@@ -63,7 +64,6 @@ public class MemoryGraphPanel extends JPanel {
         // 绘制已分配
         for (ProcessOccupancy process : processes) {
             g.setColor(Color.RED);
-//            System.out.println(process.getProcess().getName() + " " + process.getAllocatedBegin() + " " + process.getProcess().getNeedSize());
             int begin = process.getAllocatedBegin();
             int end = begin + process.getProcess().getNeedSize();
             g.fillRect(begin * SHEET_WIDTH, 15, (end - begin) * SHEET_WIDTH, getHeight()-23);

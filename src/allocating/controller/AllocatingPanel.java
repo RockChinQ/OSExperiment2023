@@ -29,10 +29,12 @@ public class AllocatingPanel extends JPanel {
         initializeButton.setLocation(180, 10);
         initializeButton.setSize(100, 30);
         initializeButton.addActionListener((e) -> {
+            // 初始化 分配服务
             allocatingService = new AllocatingService((int) memorySizeField.getValue());
 
             AbstractAllocatingAlgorithm[] algorithms = allocatingService.getAlgorithms();
 
+            // 根据算法数量，创建对应数量的内存图面板
             for (AbstractAllocatingAlgorithm algo : algorithms){
                 MemoryGraphPanel memoryGraphPanel = getMemoryGraphPanel(algo);
                 memoryGraphPanel.setSize(600, 50);
@@ -52,6 +54,7 @@ public class AllocatingPanel extends JPanel {
         addProcess.setSize(100, 30);
         addProcess.setEnabled(false);
         addProcess.addActionListener((e) -> {
+            // 添加进程
             AddProcessDialog addProcessDialog = new AddProcessDialog(this);
             addProcessDialog.setVisible(true);
         });
@@ -74,6 +77,7 @@ public class AllocatingPanel extends JPanel {
     }
 
     public void updateProcessList(AllocatingResult[] allocatingResults) {
+        // 更新内存图
         for (AllocatingResult allocatingResult : allocatingResults) {
             for (MemoryGraphPanel memoryGraphPanel : memoryGraphPanels) {
                 if (memoryGraphPanel.getName().equals(allocatingResult.getAlgoName())) {

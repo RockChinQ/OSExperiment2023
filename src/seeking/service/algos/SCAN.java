@@ -40,10 +40,10 @@ public class SCAN implements ISeekingAlgorithm {
 
         int resultIndex = 0;
         // 先走到最外面
-        for (int i = 0; i< targetLargerThanInitial.size(); i++) {
-            magneticTracksOrder[resultIndex] = targetLargerThanInitial.get(i);
-            totalMovingTracks += Math.abs(targetLargerThanInitial.get(i) - initialMagneticTrack);
-            initialMagneticTrack = targetLargerThanInitial.get(i);
+        for (Integer integer : targetLargerThanInitial) {
+            magneticTracksOrder[resultIndex] = integer;
+            totalMovingTracks += Math.abs(integer - initialMagneticTrack);
+            initialMagneticTrack = integer;
             resultIndex++;
         }
 
